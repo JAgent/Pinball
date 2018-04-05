@@ -48,32 +48,30 @@ public class FlipperController : MonoBehaviour {
 			Touch t = Input.GetTouch(i);
 //			var id = Input.touches[i].fingerId;
 			var pos = Input.touches[i].position;
-			if (t.phase == TouchPhase.Began) {
-				// 左画面をタッチしたとき左手フリッパーを動かす
-				if(pos.x < Screen.width / 2 && tag == "LeftFlipperTag") {
-					// 画面中央より左がタッチされたときの処理
-					SetAngle (this.flickAngle);
-				}
-				// 右画面をタッチしたとき右手フリッパーを動かす
-				if(pos.x > Screen.width / 2 && tag == "RightFlipperTag") {
-					SetAngle (this.flickAngle);
+			if (t.phase == TouchPhase.Began || t.phase == TouchPhase.Moved || t.phase == TouchPhase.Stationary) {
+				// 触れている
+				if (t.phase == TouchPhase.Began) {
+					// 左画面をタッチしたとき左手フリッパーを動かす
+					if (pos.x < Screen.width / 2 && tag == "LeftFlipperTag") {
+						// 画面中央より左がタッチされたときの処理
+						SetAngle (this.flickAngle);
+					}
+					// 右画面をタッチしたとき右手フリッパーを動かす
+					if (pos.x > Screen.width / 2 && tag == "RightFlipperTag") {
+						SetAngle (this.flickAngle);
+					}
 				}
 			}
 			else {
-				if (t.phase == TouchPhase.Ended) {
-					// 左画面から指を離したとき左手フリッパーを戻す
-					if(pos.x < Screen.width / 2 && tag == "LeftFlipperTag") {
-						// 画面中央より左がタッチされたときの処理
-						SetAngle (this.defaultAngle);
-					}
-					// 右画面から指を離したとき右手フリッパーを戻す
-					if(pos.x > Screen.width / 2 && tag == "RightFlipperTag") {
-						SetAngle (this.defaultAngle);
-					}
+				// それ以外の場合は触れていない
+				if (tag == "LeftFlipperTag") {
+					SetAngle (this.defaultAngle);
+				}
+				if (tag == "RightFlipperTag") {
+					SetAngle (this.defaultAngle);
 				}
 			}
 		}
-
 		// 矢印方向キーを離した時フリッパーを戻す
 		if (Input.GetKeyUp(KeyCode.LeftArrow) && tag == "LeftFlipperTag") {
 			SetAngle (this.defaultAngle);
