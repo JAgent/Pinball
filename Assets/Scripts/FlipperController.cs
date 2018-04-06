@@ -13,6 +13,10 @@ public class FlipperController : MonoBehaviour {
 	// 弾いた時の傾き
 	private float flickAngle = -20;
 
+	// 左右の指識別
+	private int L_finger;
+	private int R_finger;
+
 	// Use this for initialization
 	void Start () {
 		// HingeJointコンポーネント取得
@@ -20,6 +24,11 @@ public class FlipperController : MonoBehaviour {
 
 		// フリッパーの傾きを設定
 		SetAngle(this.defaultAngle);
+
+		// 指識別子の初期化
+		L_finger = 0;
+		R_finger = 0;
+
 	}
 	
 	// Update is called once per frame
@@ -55,19 +64,21 @@ public class FlipperController : MonoBehaviour {
 					if (pos.x < Screen.width / 2 && tag == "LeftFlipperTag") {
 						// 画面中央より左がタッチされたときの処理
 						SetAngle (this.flickAngle);
+						L_finger = t.fingerId;
 					}
 					// 右画面をタッチしたとき右手フリッパーを動かす
 					if (pos.x > Screen.width / 2 && tag == "RightFlipperTag") {
 						SetAngle (this.flickAngle);
+						R_finger = t.fingerId;
 					}
 				}
 			}
 			else {
 				// それ以外の場合は触れていない
-				if (tag == "LeftFlipperTag") {
+				if (t.fingerId == L_finger && tag == "LeftFlipperTag") {
 					SetAngle (this.defaultAngle);
 				}
-				if (tag == "RightFlipperTag") {
+				if (t.fingerId == R_finger && tag == "RightFlipperTag") {
 					SetAngle (this.defaultAngle);
 				}
 			}
