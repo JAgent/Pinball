@@ -11,10 +11,11 @@ public class BallController : MonoBehaviour {
 	public int Score = 0;
 	public GameObject Ball;
 
+	//　ゲームオーバー判定フラグ
+	public int GO_flag = 0;
+
 	// スコアを表示するテキスト
 	private GameObject scoreText;
-
-
 
 	// ゲームオーバーを表示するテキスト
 	private GameObject gameoverText;
@@ -34,6 +35,7 @@ public class BallController : MonoBehaviour {
 		if (this.transform.position.z < this.visiblePosZ) {
 			// GameoverTextにゲームオーバーを表示する
 			this.gameoverText.GetComponent<Text> ().text = "Game Over";
+			this.GO_flag = 1;
 		}
 	}
 
@@ -48,5 +50,6 @@ public class BallController : MonoBehaviour {
 			Score = Score + 50;
 		}
 		scoreText.GetComponent<Text> ().text = "スコア：" + Score;
+		Debug.Log ("Score = " + Score);
 	}
 }

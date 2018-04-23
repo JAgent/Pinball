@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FlipperController : MonoBehaviour {
 	// HingeJointコンポーネントを入れる
@@ -12,15 +13,21 @@ public class FlipperController : MonoBehaviour {
 	private float defaultAngle = 20;
 	// 弾いた時の傾き
 	private float flickAngle = -20;
+	public BallController ballcontroller;
+	public GameObject Ball;
 
 	// 左右の指識別
 	private int L_finger;
 	private int R_finger;
 
+	private int GO_flag;
+
 	// Use this for initialization
 	void Start () {
 		// HingeJointコンポーネント取得
 		this.myHingeJoint = GetComponent<HingeJoint>();
+		// ballcontrollerコンポーネント取得
+		ballcontroller = Ball.GetComponent<BallController>();
 
 		// フリッパーの傾きを設定
 		SetAngle(this.defaultAngle);
@@ -33,6 +40,8 @@ public class FlipperController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		GO_flag = ballcontroller.GO_flag;
 
 		// 左矢印方向キーを押したとき左手フリッパーを動かす
 		if (Input.GetKeyDown(KeyCode.LeftArrow) && tag == "LeftFlipperTag") {
@@ -50,7 +59,7 @@ public class FlipperController : MonoBehaviour {
 		if (Input.GetKeyUp(KeyCode.RightArrow) && tag == "RightFlipperTag") {
 			SetAngle (this.defaultAngle);
 		}
-			
+
 //		Touch[] myTouches = Input.touches;
 		for(int i = 0; i < Input.touchCount; i++)
 		{
@@ -72,6 +81,10 @@ public class FlipperController : MonoBehaviour {
 						R_finger = t.fingerId;
 					}
 				}
+				if (GO_flag == 1) {
+					SceneManager.LoadScene ("GameScene");
+				}
+
 			}
 			else {
 				// それ以外の場合は触れていない

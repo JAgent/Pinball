@@ -1307,6 +1307,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ab0c802bf1e444c2890bea39bffd9c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballcontroller: {fileID: 0}
+  Ball: {fileID: 1765537216}
 --- !u!64 &657251163
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1480,6 +1482,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ab0c802bf1e444c2890bea39bffd9c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballcontroller: {fileID: 0}
+  Ball: {fileID: 1765537216}
 --- !u!64 &857491890
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1706,6 +1710,10 @@ Prefab:
     - target: {fileID: 100000, guid: 9dbab53de2f2c488bbdcbac96d8a9284, type: 3}
       propertyPath: m_TagString
       value: LeftFlipperTag
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 9dbab53de2f2c488bbdcbac96d8a9284, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9dbab53de2f2c488bbdcbac96d8a9284, type: 3}
@@ -2595,6 +2603,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Score: 0
   Ball: {fileID: 1765537216}
+  GO_flag: 0
 --- !u!1 &1783058993
 GameObject:
   m_ObjectHideFlags: 0
